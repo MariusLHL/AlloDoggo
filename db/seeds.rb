@@ -12,11 +12,22 @@ Dogsitter.destroy_all
 Stroll.destroy_all
 City.destroy_all
 
-10.loop do
+10.times do
+  puts "t"
   City.create(name: Faker::Address.city)
 end
-Dog.create(name:"Rex", city_id: City.first.id)
 
-Dogsitter.create(first_name:"Jean-Michel", last_name:"Promeneur", city_id: City.first.id)
+23.times do
+  puts "e"
+  Dog.create(name:Faker::Lorem.word, city_id: rand(City.first.id..City.last.id))
+end
 
-Stroll.create(dogsitter_id: Dogsitter.first.id, dog_id: Dog.first.id)
+10.times do
+  puts "s"
+  Dogsitter.create(first_name:Faker::Name.first_name , last_name:Faker::Name.last_name , city_id: rand(City.first.id..City.last.id))
+end
+
+50.times do
+  puts "t"
+  Stroll.create(dogsitter_id: rand(Dogsitter.first.id..Dogsitter.last.id), dog_id: rand(Dog.first.id..Dog.last.id))
+end
